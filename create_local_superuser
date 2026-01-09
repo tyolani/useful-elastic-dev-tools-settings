@@ -1,0 +1,24 @@
+PUT _security/role/local_superuser
+{
+    "cluster": [
+      "cancel_task", "create_snapshot", "cross_cluster_search", "manage", "manage_behavioral_analytics", 
+      "manage_data_frame_transforms", "manage_enrich", "manage_ilm", "manage_index_templates", "manage_ingest_pipelines", "manage_logstash_pipelines", "manage_ml",
+      "manage_pipeline", "manage_rollup", "manage_slm", "manage_transform", "manage_watcher", 
+      "monitor", "monitor_data_frame_transforms", "monitor_ml", "monitor_rollup", "monitor_snapshot", "monitor_text_structure", "monitor_transform", "monitor_watcher",
+      "post_behavioral_analytics_event", "read_ilm", "read_pipeline", "read_security", "read_slm"
+    ],
+    "indices": [ {
+        "names": [ "*", ".*" ],
+        "privileges": [ "all" ],
+        "field_security": {
+          "grant": [ "*" ],
+          "except": []
+        },
+        "allow_restricted_indices": false
+    } ],
+    "applications": [ {
+        "application": "kibana-.kibana",
+        "privileges": [ "all" ],
+        "resources": [ "*" ]
+    } ]
+}
