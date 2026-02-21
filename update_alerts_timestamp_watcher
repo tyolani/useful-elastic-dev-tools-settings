@@ -1,0 +1,32 @@
+PUT _watcher/watch/update_alerts_timestamp
+{
+  "trigger": {
+    "schedule": {
+      "interval": "6h"
+    }
+  },
+  "input": {
+    "simple": {}
+  },
+  "actions": {
+    "update_by_query": {
+      "webhook": {
+        "method": "POST",
+        "url": "https://**please URL here**/.internal.alerts-security.alerts-default-*/_update_by_query?pipeline=AttackDiscoveryTimestampUpdate", 
+        "auth": {
+          "basic": {
+            "username": "xxxxx", 
+            "password": "xxxxx" 
+          }
+        },
+        "body": """{
+     
+          "query": {
+            "term": {
+              "kibana.alert.workflow_tags": "ad"              }
+          }
+        }"""
+      }
+    }
+  }
+}
