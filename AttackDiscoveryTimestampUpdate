@@ -1,0 +1,21 @@
+PUT _ingest/pipeline/AttackDiscoveryTimestampUpdate
+{
+  "description": "Update ingest time",
+  "processors": [
+    {
+      "date": {
+        "field": "@timestamp",
+        "formats": [
+          "ISO8601"
+        ],
+        "output_format": "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSSXXX"
+      }
+    },
+    {
+      "set": {
+        "field": "@timestamp",
+        "value": "{{_ingest.timestamp}}"
+      }
+    }
+  ]
+}
